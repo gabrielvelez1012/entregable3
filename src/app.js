@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const db = require('./utils/database');
 const initModels = require('./models/initModels');
+const userRoutes = require('./routes/user.route')
 
 initModels();
 
@@ -26,6 +27,8 @@ db.authenticate()
 db.sync()
     .then(() => console.log("DataBase sync"))
     .catch((error) => console.log(error));    
+
+app.use(userRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome users');
